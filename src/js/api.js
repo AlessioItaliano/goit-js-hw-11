@@ -23,9 +23,8 @@ export class apiServicePixabay {
     });
 
     const URL = `${BASE_URL}?${SERCH_PARAMS}`;
-
     const { data } = await axios.get(URL);
-    console.log(data);
+
     return data;
   }
 
