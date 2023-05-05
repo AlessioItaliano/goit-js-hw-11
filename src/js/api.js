@@ -23,11 +23,15 @@ export class apiServicePixabay {
     });
 
     const URL = `${BASE_URL}?${SERCH_PARAMS}`;
-    const { data } = await axios.get(URL);
+    try {
+      const { data } = await axios.get(URL);
 
-    return data;
+      return data;
+    } catch (error) {
+      console.log(error);
+      // clearGallery();
+    }
   }
-
   incrementPage() {
     return (this.page += 1);
   }
@@ -36,9 +40,9 @@ export class apiServicePixabay {
     return (this.page = 1);
   }
 
-  setTotal(total) {
-    return (this.totalPages = total);
-  }
+  // setTotal(total) {
+  //   return (this.totalPages = total);
+  // }
 
   resetTotalPage() {
     return (this.totalPages = 0);

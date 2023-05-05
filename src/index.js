@@ -38,11 +38,13 @@ async function onSubmit(evt) {
         'Sorry, there are no images matching your search query. Please try again.'
       );
     }
-
     Notify.success(`Hooray! We found ${totalHits} images.`);
 
     const markup = createMarkup(hits);
     updateMarkup(markup);
+    if (hits.length < 40) {
+      return loadMoreBtn.classList.add('is-hidden');
+    }
     loadMoreBtn.classList.remove('is-hidden');
   } catch (error) {
     console.log(error);
@@ -55,7 +57,7 @@ async function onMoreAddingBtn(evt) {
   evt.preventDefault();
   apiService.incrementPage();
 
-  if (!apiService.endOfImages) {
+  if (apiService.endOfImages) {
     loadMoreBtn.classList.add('is-hidden');
     Notify.info("We're sorry, but you've reached the end of search results.");
   }
